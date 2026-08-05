@@ -6,7 +6,7 @@ public class Empleado {
     private String departamento;
 
     public Empleado(){}
-    public Empleado(String nombre,String genero, double salarioBase, int horasTrabajadas, String departamento) {
+    public Empleado(String nombre,String genero, double salarioBase, int horasTrabajadas, Departamento departamento) {
         this.nombre = nombre;
         this.genero= genero;
         this.salarioBase = salarioBase;
@@ -15,37 +15,26 @@ public class Empleado {
     }
 
     public double calcularSalario() {
-    validarSalarioBase();
-    validarHorasTrabajadas();
-    double salarioTotal = salarioBase;
-    salarioTotal += calcularHorasExtra();
-    salarioTotal += calcularBonificacionDepartamento();
-    //Aplicamos Extract Method, cada responsabilidad va respectvamente con su metodo separado
-    return salarioTotal;
-    }
-    private void validarSalarioBase() {
-        if (salarioBase <= 0) {
+        double salarioTotal = salarioBase;
+        int horas_normales = 40;
+        double tarifa_hora_extra = 50.0;
+
+        if (salarioBase < 0) {
             throw new IllegalArgumentException("El salario debe ser mayor o igual a 0");
         }
-    }
-    private void validarHorasTrabajadas() {
         if (horasTrabajadas < 0) {
             throw new IllegalArgumentException("Las horas trabajadas deben ser mayor o igual a 0");
         }
-    }
-    private double calcularHorasExtra() {
-        if (horasTrabajadas > 40) {
-            return (horasTrabajadas - 40) * 50;
+
+        if (horasTrabajadas > horas_normales) {
+            salarioTotal += (horasTrabajadas - horas_normales) * tarifa_hora_extra;
         }
-        return 0;
+        
+        salarioTotal += departamento.getBono();
+
+        return salarioTotal;
     }
-    private double calcularBonificacionDepartamento() {
-        switch (departamento) {
-            case "Sistemas": return 20;
-            case "Contabilidad": return 10;
-            default: return 0;
-        }
-    }
+  
     public void imprimirDetalles(){
         System.out.println("Nombre: " + nombre);
         System.out.println("Genero: " + genero);
@@ -84,11 +73,11 @@ public class Empleado {
         this.horasTrabajadas = horasTrabajadas;
     }
 
-    public String getDepartamento() {
+    public Departamento getDepartamento() {
         return departamento;
     }
 
-    public void setDepartamento(String departamento) {
+    public void setDepartamento(Departamento departamento) {
         this.departamento = departamento;
     }
 

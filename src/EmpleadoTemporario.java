@@ -13,13 +13,9 @@ public class EmpleadoTemporario extends Empleado {
         this.mesesContrato = mesesContrato;
         
     }
-
+    @Override
     public void imprimirDetalles() {
-        System.out.println("Nombre: " + nombre);
-        System.out.println("Genero: " + super.getGenero());
-        System.out.println("Salario: " + salarioBase);
-        System.out.println("Horas trabajadas: " + horasTrabajadas);
-        System.out.println("Departamento: " + departamento);
+        super.imprimirDetalles();
         System.out.println("Meses de contrato: " + mesesContrato);
     }
 

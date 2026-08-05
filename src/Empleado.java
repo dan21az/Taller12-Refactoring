@@ -40,6 +40,13 @@ public class Empleado {
         }
         return salarioTotal;
     }
+    public void imprimirDetalles(){
+        System.out.println("Nombre: " + nombre);
+        System.out.println("Genero: " + genero);
+        System.out.println("Salario: " + salarioBase);
+        System.out.println("Horas trabajadas: " + horasTrabajadas);
+        System.out.println("Departamento: " + departamento);
+    }
 
     public String getNombre() {
         return nombre;

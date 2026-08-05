@@ -3,7 +3,7 @@ public class EmpleadoFijo extends Empleado {
     
 
     public EmpleadoFijo(String nombre, double salarioBase, int horasTrabajadas, String departamento, double bonoAnual, String genero) {
-        super(nombre,genero, salarioBase, horasTrabajadas, 0, departamento);
+        super(nombre,genero, salarioBase, horasTrabajadas, departamento);
         this.bonoAnual = bonoAnual;
         
     }
